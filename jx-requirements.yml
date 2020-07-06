@@ -1,35 +1,82 @@
+autoUpdate:
+  enabled: false
+  schedule: ""
+bootConfigURL: https://github.com/jenkins-x/jenkins-x-boot-config.git
 cluster:
-  clusterName: ""
-  environmentGitOwner: ""
-  environmentGitPublic: false
-  project: ""
-  provider: gke
-  zone: ""
-gitops: true
+  clusterName: muta
+  devEnvApprovers:
+  - yejiayu
+  environmentGitOwner: muta-robot
+  gitKind: github
+  gitName: github
+  gitServer: https://github.com
+  namespace: jx
+  provider: eks
+  region: ap-southeast-1
+  registry: docker.io
 environments:
-- key: dev
-- key: staging
-- key: production
+- ingress:
+    domain: muta-devops.muta.dev
+    externalDNS: true
+    ignoreLoadBalancer: true
+    namespaceSubDomain: -jx.
+    tls:
+      email: yejiayu.fe@gmail.com
+      enabled: true
+      production: true
+  key: dev
+  repository: environment-muta-dev
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: staging
+  repository: environment-muta-staging
+- ingress:
+    domain: ""
+    externalDNS: false
+    namespaceSubDomain: ""
+    tls:
+      email: ""
+      enabled: false
+      production: false
+  key: production
+  repository: environment-muta-production
+gitops: true
 ingress:
-  domain: ""
-  externalDNS: false
+  domain: muta-devops.muta.dev
+  externalDNS: true
+  ignoreLoadBalancer: true
+  namespaceSubDomain: -jx.
   tls:
-    email: ""
-    enabled: false
-    production: false
+    email: yejiayu.fe@gmail.com
+    enabled: true
+    production: true
 kaniko: true
+repository: nexus
 secretStorage: local
 storage:
+  backup:
+    enabled: true
+    url: s3://muta-backup-7f864c24-fdb8-46ec-9ae8-203e331e3d70
   logs:
-    enabled: false
-    url: ""
+    enabled: true
+    url: s3://muta-logs-6f38c6f8-39f6-449d-b371-37cdf98c7286
   reports:
-    enabled: false
-    url: ""
+    enabled: true
+    url: s3://muta-reports-b2784c19-7886-45bb-8f3b-faaf1fc63b9a
   repository:
     enabled: false
     url: ""
+vault: {}
+velero:
+  schedule: ""
+  ttl: ""
 versionStream:
-  ref: "master"
+  ref: v1.0.520
   url: https://github.com/jenkins-x/jenkins-x-versions.git
-webhook: lighthouse
+webhook: prow

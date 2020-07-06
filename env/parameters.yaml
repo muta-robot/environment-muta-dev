@@ -1,0 +1,15 @@
+adminUser:
+  password: local:muta/adminUser:password
+  username: mutadev
+docker:
+  email: yejiayu.fe@gmail.com
+  password: local:muta/docker:password
+  url: https://index.docker.io/v1/
+  username: mutadev
+enableDocker: true
+pipelineUser:
+  email: yejiayu@cryptape.com
+  token: local:muta/pipelineUser:token
+  username: muta-robot
+prow:
+  hmacToken: local:muta/prow:hmacToken
