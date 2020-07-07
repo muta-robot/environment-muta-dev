@@ -70,8 +70,8 @@ storage:
     enabled: true
     url: s3://muta-reports-b2784c19-7886-45bb-8f3b-faaf1fc63b9a
   repository:
-    enabled: false
-    url: ""
+    enabled: true
+    url: s3://muta-repository-3e9b6245-8dd2-4d61-abe8-2ce447b5659e
 vault: {}
 velero:
   schedule: ""
