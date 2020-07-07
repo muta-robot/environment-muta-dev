@@ -1,0 +1,21 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: nervosnetwork
+    provider: github
+    repository: huobi-chain
+  name: nervosnetwork-huobi-chain
+spec:
+  description: Imported application for nervosnetwork/huobi-chain
+  httpCloneURL: https://github.com/nervosnetwork/huobi-chain.git
+  org: nervosnetwork
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: huobi-chain
+  scheduler:
+    kind: ""
+    name: muta-scheduler
+  url: https://github.com/nervosnetwork/huobi-chain.git

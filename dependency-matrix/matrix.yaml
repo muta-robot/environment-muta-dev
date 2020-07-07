@@ -5,3 +5,9 @@ dependencies:
   url: https://github.com/nervosnetwork/muta.git
   version: ""
   versionURL: ""
+- host: github.com
+  owner: nervosnetwork
+  repo: huobi-chain
+  url: https://github.com/nervosnetwork/huobi-chain.git
+  version: ""
+  versionURL: ""
