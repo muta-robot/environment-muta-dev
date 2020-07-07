@@ -1,0 +1,124 @@
+apiVersion: jenkins.io/v1
+kind: Scheduler
+metadata:
+  name: muta-scheduler
+spec:
+  policy:
+    policy:
+      requiredStatusChecks:
+        contexts:
+          entries:
+            - lint
+            - unit
+            - e2e
+  lgtm:
+    reviewActsAsLgtm: true
+  merger:
+    mergeMethod: squash
+    targetUrl: https://dashboard.muta-devops.muta.dev
+    prStatusBaseUrl: https://dashboard.muta-devops.muta.dev
+  plugins:
+    entries:
+    - approve
+    - assign
+    - blunderbuss
+    - help
+    - hold
+    - lgtm
+    - lifecycle
+    - override
+    - size
+    - trigger
+    - wip
+    - heart
+    - cat
+    - dog
+    - pony
+  policy:
+    protectTested: true
+  postsubmits:
+    replace: true
+    entries:
+    - agent: tekton
+      branches:
+        entries:
+        - master
+      name: release
+      context: ""
+      # policy:
+      #   requiredStatusChecks:
+      #     contexts:
+      #       entries:
+      #       - whitesource
+  presubmits:
+    replace: true
+    entries:
+    - agent: tekton
+      optional: true
+      alwaysRun: true
+      context: e2e
+      name: e2e
+      policy:
+        requiredStatusChecks:
+          contexts:
+            entries:
+            - clippy
+            - lint
+      queries:
+      - labels:
+          entries:
+          - approved
+          - lgtm
+        missingLabels:
+          entries:
+          - do-not-merge
+          - do-not-merge/hold
+          - do-not-merge/work-in-progress
+          - needs-ok-to-test
+          - needs-rebase
+          - needs-security-review
+      report: true
+      rerunCommand: /test e2e
+      trigger: (?m)^/test( all| e2e),?(\s+|$)
+    - agent: tekton
+      optional: true
+      alwaysRun: true
+      context: lint
+      name: lint
+      queries:
+      - labels:
+          entries:
+           - approved
+           - lgtm
+        missingLabels:
+          entries:
+          - do-not-merge
+          - do-not-merge/hold
+          - do-not-merge/work-in-progress
+          - needs-ok-to-test
+          - needs-rebase
+      report: true
+      rerunCommand: /test lint
+      trigger: (?m)^/test( all| lint),?(\s+|$)
+    - agent: tekton
+      optional: true
+      alwaysRun: true
+      context: unit
+      name: unit
+      queries:
+      - labels:
+          entries:
+          - approved
+          - lgtm
+        missingLabels:
+          entries:
+          - do-not-merge
+          - do-not-merge/hold
+          - do-not-merge/work-in-progress
+          - needs-ok-to-test
+          - needs-rebase
+          - needs-security-review
+      report: true
+      rerunCommand: /test unit
+      trigger: (?m)^/test( all| unit),?(\s+|$)
+
