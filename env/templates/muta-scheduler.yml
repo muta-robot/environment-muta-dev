@@ -55,6 +55,26 @@ spec:
     entries:
     - agent: tekton
       optional: true
+      alwaysRun: false
+      context: chaos
+      name: chaos
+      queries:
+      - labels:
+          entries:
+           - approved
+           - lgtm
+        missingLabels:
+          entries:
+          - do-not-merge
+          - do-not-merge/hold
+          - do-not-merge/work-in-progress
+          - needs-ok-to-test
+          - needs-rebase
+      report: true
+      rerunCommand: /test chaos
+      trigger: (?m)^/test( all| chaos),?(\s+|$)
+    - agent: tekton
+      optional: false
       alwaysRun: true
       context: e2e
       name: e2e
@@ -81,7 +101,7 @@ spec:
       rerunCommand: /test e2e
       trigger: (?m)^/test( all| e2e),?(\s+|$)
     - agent: tekton
-      optional: true
+      optional: false
       alwaysRun: true
       context: lint
       name: lint
@@ -101,7 +121,7 @@ spec:
       rerunCommand: /test lint
       trigger: (?m)^/test( all| lint),?(\s+|$)
     - agent: tekton
-      optional: true
+      optional: false
       alwaysRun: true
       context: unit
       name: unit
