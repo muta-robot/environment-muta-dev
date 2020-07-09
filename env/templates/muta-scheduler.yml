@@ -82,7 +82,7 @@ spec:
         requiredStatusChecks:
           contexts:
             entries:
-            - clippy
+            - uint
             - lint
       queries:
       - labels:
