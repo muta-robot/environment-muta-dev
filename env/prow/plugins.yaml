@@ -1,0 +1,152 @@
+approve:
+- lgtm_acts_as_approve: true
+  repos:
+  - muta-robot/environment-muta-dev
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - muta-robot/environment-muta-production
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - muta-robot/environment-muta-staging
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - nervosnetwork/huobi-chain
+  require_self_approval: true
+- lgtm_acts_as_approve: true
+  repos:
+  - nervosnetwork/muta
+  require_self_approval: true
+blunderbuss: {}
+cat: {}
+cherry_pick_unapproved: {}
+config_updater:
+  maps:
+    env/prow/config.yaml:
+      name: config
+    env/prow/plugins.yaml:
+      name: plugins
+heart: {}
+label:
+  additional_labels: null
+lgtm:
+- repos:
+  - nervosnetwork/huobi-chain
+  review_acts_as_lgtm: true
+- repos:
+  - nervosnetwork/muta
+  review_acts_as_lgtm: true
+owners: {}
+plugins:
+  muta-robot/environment-muta-dev:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+  muta-robot/environment-muta-production:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+  muta-robot/environment-muta-staging:
+  - config-updater
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - override
+  - dog
+  - pony
+  nervosnetwork/huobi-chain:
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - override
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - dog
+  - pony
+  nervosnetwork/muta:
+  - approve
+  - assign
+  - blunderbuss
+  - help
+  - hold
+  - lgtm
+  - lifecycle
+  - override
+  - size
+  - trigger
+  - wip
+  - heart
+  - cat
+  - dog
+  - pony
+requiresig: {}
+sigmention: {}
+size:
+  l: 0
+  m: 0
+  s: 0
+  xl: 0
+  xxl: 0
+slack: {}
+triggers:
+- repos:
+  - muta-robot/environment-muta-dev
+  trusted_org: muta-robot
+- repos:
+  - muta-robot/environment-muta-production
+  trusted_org: muta-robot
+- repos:
+  - muta-robot/environment-muta-staging
+  trusted_org: muta-robot
+- repos:
+  - nervosnetwork/huobi-chain
+  trusted_org: muta-robot
+- repos:
+  - nervosnetwork/muta
+  trusted_org: muta-robot
+welcome:
+- message_template: Welcome

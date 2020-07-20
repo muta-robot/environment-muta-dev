@@ -1,0 +1,197 @@
+branch-protection:
+  orgs:
+    muta-robot:
+      repos:
+        environment-muta-dev:
+          required_status_checks:
+            contexts:
+            - promotion-build
+        environment-muta-production:
+          required_status_checks:
+            contexts:
+            - promotion-build
+        environment-muta-staging:
+          required_status_checks:
+            contexts:
+            - promotion-build
+  protect-tested-repos: true
+deck:
+  spyglass: {}
+gerrit: {}
+github:
+  LinkURL: null
+owners_dir_blacklist:
+  default: null
+  repos: null
+plank: {}
+pod_namespace: jx
+postsubmits:
+  muta-robot/environment-muta-dev:
+  - agent: tekton
+    branches:
+    - master
+    name: promotion
+    skip_report: true
+  muta-robot/environment-muta-production:
+  - agent: tekton
+    branches:
+    - master
+    name: promotion
+    skip_report: true
+  muta-robot/environment-muta-staging:
+  - agent: tekton
+    branches:
+    - master
+    name: promotion
+    skip_report: true
+  nervosnetwork/huobi-chain:
+  - agent: tekton
+    branches:
+    - master
+    name: release
+  nervosnetwork/muta:
+  - agent: tekton
+    branches:
+    - master
+    name: release
+presubmits:
+  muta-robot/environment-muta-dev:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  muta-robot/environment-muta-production:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  muta-robot/environment-muta-staging:
+  - agent: tekton
+    always_run: true
+    context: promotion-build
+    name: promotion-build
+    rerun_command: /test this
+    trigger: (?m)^/test( all| this),?(\s+|$)
+  nervosnetwork/huobi-chain:
+  - agent: tekton
+    always_run: false
+    context: chaos
+    name: chaos
+    optional: true
+    rerun_command: /test chaos
+    trigger: (?m)^/test( chaos),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: e2e
+    name: e2e
+    rerun_command: /test e2e
+    trigger: (?m)^/test( all| e2e),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: lint
+    name: lint
+    rerun_command: /test lint
+    trigger: (?m)^/test( all| lint),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: unit
+    name: unit
+    rerun_command: /test unit
+    trigger: (?m)^/test( all| unit),?(\s+|$)
+  nervosnetwork/muta:
+  - agent: tekton
+    always_run: false
+    context: chaos
+    name: chaos
+    optional: true
+    rerun_command: /test chaos
+    trigger: (?m)^/test( chaos),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: e2e
+    name: e2e
+    rerun_command: /test e2e
+    trigger: (?m)^/test( all| e2e),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: lint
+    name: lint
+    rerun_command: /test lint
+    trigger: (?m)^/test( all| lint),?(\s+|$)
+  - agent: tekton
+    always_run: true
+    context: unit
+    name: unit
+    rerun_command: /test unit
+    trigger: (?m)^/test( all| unit),?(\s+|$)
+prowjob_namespace: jx
+push_gateway:
+  serve_metrics: false
+sinker: {}
+tide:
+  context_options:
+    from-branch-protection: true
+    required-if-present-contexts: []
+    skip-unknown-contexts: false
+  merge_method:
+    muta-robot/environment-muta-dev: merge
+    muta-robot/environment-muta-production: merge
+    muta-robot/environment-muta-staging: merge
+    nervosnetwork/huobi-chain: squash
+    nervosnetwork/muta: squash
+  pr_status_base_url: https://dashboard-jx.muta-devops.muta.dev
+  queries:
+  - labels:
+    - approved
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - muta-robot/environment-muta-dev
+    - muta-robot/environment-muta-production
+    - muta-robot/environment-muta-staging
+  - labels:
+    - updatebot
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - muta-robot/environment-muta-dev
+    - muta-robot/environment-muta-production
+    - muta-robot/environment-muta-staging
+  - labels:
+    - approved
+    - lgtm
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    repos:
+    - nervosnetwork/huobi-chain
+    - nervosnetwork/muta
+  - labels:
+    - approved
+    - lgtm
+    missingLabels:
+    - do-not-merge
+    - do-not-merge/hold
+    - do-not-merge/work-in-progress
+    - needs-ok-to-test
+    - needs-rebase
+    - needs-security-review
+    repos:
+    - nervosnetwork/huobi-chain
+    - nervosnetwork/muta
+  target_url: https://dashboard-jx.muta-devops.muta.dev
