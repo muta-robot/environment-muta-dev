@@ -15,8 +15,6 @@ spec:
     reviewActsAsLgtm: true
   merger:
     mergeMethod: squash
-    targetUrl: https://dashboard.muta-devops.muta.dev
-    prStatusBaseUrl: https://dashboard.muta-devops.muta.dev
   plugins:
     entries:
     - approve
@@ -72,7 +70,7 @@ spec:
           - needs-rebase
       report: true
       rerunCommand: /test chaos
-      trigger: (?m)^/test( all| chaos),?(\s+|$)
+      trigger: (?m)^/test( chaos),?(\s+|$)
     - agent: tekton
       optional: false
       alwaysRun: true
