@@ -78,12 +78,6 @@ spec:
       alwaysRun: true
       context: e2e
       name: e2e
-      policy:
-        requiredStatusChecks:
-          contexts:
-            entries:
-            - unit
-            - lint
       queries:
       - labels:
           entries:
