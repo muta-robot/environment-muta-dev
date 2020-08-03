@@ -1,0 +1,21 @@
+apiVersion: jenkins.io/v1
+kind: SourceRepository
+metadata:
+  creationTimestamp: null
+  labels:
+    owner: HuobiGroup
+    provider: github
+    repository: huobi-chain
+  name: huobigroup-huobi-chain
+spec:
+  description: Imported application for HuobiGroup/huobi-chain
+  httpCloneURL: https://github.com/HuobiGroup/huobi-chain.git
+  org: HuobiGroup
+  provider: https://github.com
+  providerKind: github
+  providerName: github
+  repo: huobi-chain
+  scheduler:
+    kind: ""
+    name: muta-scheduler
+  url: https://github.com/HuobiGroup/huobi-chain.git

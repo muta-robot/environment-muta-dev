@@ -11,3 +11,9 @@ dependencies:
   url: https://github.com/nervosnetwork/huobi-chain.git
   version: ""
   versionURL: ""
+- host: github.com
+  owner: HuobiGroup
+  repo: huobi-chain
+  url: https://github.com/HuobiGroup/huobi-chain.git
+  version: ""
+  versionURL: ""
